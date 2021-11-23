@@ -9,7 +9,7 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json")
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {explorer: true})); 
-"ola estou aqui"
+
 const auth = function (req, res, next) {
   let exceptions = ["/login", "/register", "/clients", "/api-docs"];
   if (exceptions.indexOf(req.url) >= 0) {
