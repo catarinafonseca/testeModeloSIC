@@ -1,0 +1,295 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Client API",
+    "description": "Demo API",
+    "version": "1.0"
+  },
+  "produces": ["application/json"],
+  "schemes": ["http"],
+  "components": {
+    "schemas": {
+      "Client": {
+        "type": "object",
+        "required": [
+          "name",
+          "age",
+          "phone",
+          "email",
+          "nif",
+          "locality",
+          "username",
+          "password"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "phone": {
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "nif": {
+            "type": "integer"
+          },
+          "locality": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/clients": {
+      "get": {
+        "tags": ["Clients"],
+        "description": "Get Clients List",
+        "responses": {
+          "200": {
+            "description": "Clients List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#components/schemas/Client"
+                },
+                "examples": {
+                  "Clients List": [
+                    {
+                      "id": 2,
+                      "name": "Diogo",
+                      "age": 19,
+                      "phone": null,
+                      "email": "40190094@esmad.ipp.pt",
+                      "nif": 987654321,
+                      "locality": "Porto",
+                      "username": "diogo03",
+                      "password": "12345",
+                      "createdAt": "2021-11-15T21:57:14.000Z",
+                      "updatedAt": "2021-11-15T21:57:14.000Z"
+                    },
+                    {
+                      "id": 3,
+                      "name": "Diogo",
+                      "age": 19,
+                      "phone": 123456789,
+                      "email": "40190094@esmad.ipp.pt",
+                      "nif": 987654321,
+                      "locality": "Porto",
+                      "username": "diogo03",
+                      "password": "$2a$10$8LpUWUmdltb25lnB.d8PwOiTMPw6zMgxXnhNiXrHDGJTA6ow3s5ui",
+                      "createdAt": "2021-11-16T12:03:43.000Z",
+                      "updatedAt": "2021-11-18T16:19:35.000Z"
+                    },
+                    {
+                      "id": 4,
+                      "name": "Diogo",
+                      "age": 19,
+                      "phone": 123456789,
+                      "email": "40190094@esmad.ipp.pt",
+                      "nif": 987654321,
+                      "locality": "Porto",
+                      "username": "diogo03",
+                      "password": "$2a$10$NijvdK4BES2jA.rFcSlWIevibMA4bOUGkUuh.CCUPyyR3jmhEGXvG",
+                      "createdAt": "2021-11-16T12:09:33.000Z",
+                      "updatedAt": "2021-11-16T12:09:33.000Z"
+                    },
+                    {
+                      "id": 6,
+                      "name": "Maria",
+                      "age": 16,
+                      "phone": 123456789,
+                      "email": "40190094@esmad.ipp.pt",
+                      "nif": 122234567,
+                      "locality": "Porto",
+                      "username": "mc",
+                      "password": "$2a$10$/9n5xWMwGWuETk4sUlj7G.QA95fdfhUOd8ZbXb4h9AhIKJVkaOXd.",
+                      "createdAt": "2021-11-23T15:02:02.000Z",
+                      "updatedAt": "2021-11-23T15:02:02.000Z"
+                    }
+                  ]
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Error": {
+                    "value": "Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clients/{clientID}": {
+      "delete": {
+        "tags": ["Clients"],
+        "description": "Delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the client",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Sucess": {
+                    "value": "Success"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Error": {
+                    "value": "Error"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Error": {
+                    "value": "Error deleting client."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Clients"],
+        "description": "Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Client"
+              },
+              "examples": {
+                "Client": {
+                  "value": {
+                    "username": "mc",
+                    "password": "12345"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Sucess": {
+                    "value": "Bearer Token"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Error": {
+                    "value": "Error"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "Error": {
+                    "value": "Error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
